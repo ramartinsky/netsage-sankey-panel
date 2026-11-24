@@ -1,4 +1,4 @@
-import { DataFrameView, Field, getFieldDisplayName, Vector } from '@grafana/data';
+import { DataFrameView, Field, getFieldDisplayName } from '@grafana/data';
 import { getMappedColor } from './nodeColors';
 // import { color } from 'd3';
 /**
@@ -129,7 +129,7 @@ export function parseData(
 
   // get display names
   let displayNames: string[] = [];
-  allData.forEach((field: Field<any, Vector<any>>) => {
+  allData.forEach((field: Field<any>) => {
     displayNames.push(getFieldDisplayName(field));
   });
 

@@ -2,13 +2,9 @@ version: '3.0'
 
 services:
   grafana:
-    container_name: 'netsage-sankey-panel'
     build:
-      context: ./.config
       args:
-        grafana_version: ${GRAFANA_VERSION:-9.3.8}
-    ports:
-      - 3000:3000/tcp
-    volumes:
-      - ./dist:/var/lib/grafana/plugins/netsage-sankey-panel
-      - ./provisioning:/etc/grafana/provisioning
+        grafana_version: ${GRAFANA_VERSION:-13.3.1}
+    extends:
+      file: .config/docker-compose-base.yaml
+      service: grafana

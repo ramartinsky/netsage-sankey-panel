@@ -1,5 +1,4 @@
 import { PanelPlugin, FieldConfigProperty, FieldOverrideContext, getFieldDisplayName } from '@grafana/data';
-// import { standardOptionsCompat } from 'grafana-plugin-support';
 import { SankeyOptions } from './types';
 import { SankeyPanel } from './SankeyPanel';
 

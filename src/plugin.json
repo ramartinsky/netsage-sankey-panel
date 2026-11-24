@@ -1,15 +1,15 @@
 {
-  "$schema": "https://raw.githubusercontent.com/grafana/grafana/master/docs/sources/developers/plugins/plugin.schema.json",
+  "$schema": "https://raw.githubusercontent.com/grafana/grafana/main/docs/sources/developers/plugins/plugin.schema.json",
   "type": "panel",
-  "name": "Sankey Panel",
-  "id": "netsage-sankey-panel",
+  "name": "Sankey Rainbow",
+  "id": "livereply-sankeyrainbow-panel",
   "info": {
-    "description": "Sankey Panel Plugin for Grafana",
+    "description": "Sankey diagrams for flow data, with node colors driven by Grafana value mappings",
     "author": {
-      "name": "NetSage",
-      "url": "http://github.com/netsage-project"
+      "name": "Live Reply",
+      "url": "https://github.com/ramartinsky/grafana-sankey-rainbow"
     },
-    "keywords": ["netsage", "sankey"],
+    "keywords": ["sankey", "flow", "diagram", "panel", "value mappings"],
     "logos": {
       "small": "img/logo.svg",
       "large": "img/logo.svg"
@@ -17,19 +17,22 @@
     "links": [
       {
         "name": "Website",
-        "url": "https://github.com/netsage-project/netsage-sankey-panel"
+        "url": "https://github.com/ramartinsky/grafana-sankey-rainbow"
       },
       {
         "name": "License",
-        "url": "https://github.com/netsage-project/netsage-sankey-panel/blob/master/LICENSE"
+        "url": "https://github.com/ramartinsky/grafana-sankey-rainbow/blob/master/LICENSE"
       }
     ],
-    "screenshots": [{"name":"sankey2", "path":"img/sankey2.png"}, {"name":"sankey3", "path":"img/sankey3.png"}],
+    "screenshots": [
+      { "name": "Sankey by country", "path": "img/sankey2.png" },
+      { "name": "Multi-column Sankey", "path": "img/sankey3.png" }
+    ],
     "version": "%VERSION%",
     "updated": "%TODAY%"
   },
   "dependencies": {
-    "grafanaDependency": ">=8.2.0",
+    "grafanaDependency": ">=12.2.0",
     "plugins": []
   }
 }
