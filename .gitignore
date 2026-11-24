@@ -33,3 +33,7 @@ e2e-results/
 # lock files
 package-lock.json
 .DS_Store
+
+# Local credentials
+.env
+.eslintcache

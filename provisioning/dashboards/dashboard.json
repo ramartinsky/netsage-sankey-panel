@@ -1,0 +1,107 @@
+{
+  "uid": "sankey-rainbow-demo",
+  "title": "Sankey Rainbow demo",
+  "editable": true,
+  "schemaVersion": 39,
+  "time": {
+    "from": "now-6h",
+    "to": "now"
+  },
+  "panels": [
+    {
+      "id": 1,
+      "type": "livereply-sankeyrainbow-panel",
+      "title": "Sankey Rainbow - value mapping colors",
+      "gridPos": {
+        "h": 14,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "datasource": {
+        "type": "grafana-testdata-datasource",
+        "uid": "trlxrdZVk"
+      },
+      "targets": [
+        {
+          "refId": "A",
+          "scenarioId": "csv_content",
+          "csvContent": "source,destination,bytes\nItaly,US-East,120\nItaly,US-West,60\nGermany,US-East,80\nFrance,Japan,40\nGermany,Japan,30\nFrance,US-West,50",
+          "datasource": {
+            "type": "grafana-testdata-datasource",
+            "uid": "trlxrdZVk"
+          }
+        }
+      ],
+      "options": {
+        "monochrome": false,
+        "color": "blue",
+        "nodeColor": "grey",
+        "nodeWidth": 30,
+        "nodePadding": 30,
+        "labelSize": 14,
+        "iteration": 7,
+        "valueField": "bytes"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "mappings": [
+            {
+              "type": "value",
+              "options": {
+                "Italy": {
+                  "color": "green",
+                  "index": 0
+                }
+              }
+            },
+            {
+              "type": "regex",
+              "options": {
+                "pattern": "^US-.*",
+                "result": {
+                  "color": "red",
+                  "index": 1
+                }
+              }
+            }
+          ]
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "destination"
+            },
+            "properties": [
+              {
+                "id": "mappings",
+                "value": [
+                  {
+                    "type": "regex",
+                    "options": {
+                      "pattern": "^US-.*",
+                      "result": {
+                        "color": "orange",
+                        "index": 0
+                      }
+                    }
+                  },
+                  {
+                    "type": "value",
+                    "options": {
+                      "Japan": {
+                        "color": "purple",
+                        "index": 1
+                      }
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
