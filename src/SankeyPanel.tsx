@@ -24,9 +24,16 @@ export const SankeyPanel: React.FC<Props> = ({ options, data, width, height, id 
    */
   let parsedData: any[] = [];
   try {
-    parsedData = parseData(data, options, graphOptions.monochrome, graphOptions.color);
+    parsedData = parseData(
+      data,
+      options,
+      graphOptions.monochrome,
+      graphOptions.color,
+      theme.visualization.getColorByName
+    );
   } catch (error) {
     console.error('parsing error: ', error);
+    return <div role="alert">Unable to render Sankey: {error instanceof Error ? error.message : String(error)}</div>;
   }
   const displayNames = parsedData[1];
   const pluginData = parsedData[0];

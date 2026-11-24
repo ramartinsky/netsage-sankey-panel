@@ -79,8 +79,8 @@ export const Sankey: React.FC<SankeyProps> = ({
           ))}
         </g>
         <g transform={`translate(${MARGIN.left}, ${MARGIN.top})`}>
-          {nodes.map((d: { index: any; x0: any; x1: any; y0: any; y1: any; name: any; value: any }, i: any) => (
-            <Node data={d} key={i} textColor={textColor} nodeColor={nodeColor} panelId={id} labelSize={labelSize} />
+          {nodes.map((d: { index: any; x0: any; x1: any; y0: any; y1: any; name: any; value: any; color?: string }, i: any) => (
+            <Node data={d} key={i} textColor={textColor} nodeColor={d.color ?? nodeColor} panelId={id} labelSize={labelSize} />
           ))}
         </g>
       </svg>

@@ -1,4 +1,5 @@
 import { DataFrameView, Field, getFieldDisplayName, Vector } from '@grafana/data';
+import { getMappedColor } from './nodeColors';
 // import { color } from 'd3';
 /**
  * Takes data from Grafana query and returns it in the format needed for this panel
@@ -7,12 +8,19 @@ import { DataFrameView, Field, getFieldDisplayName, Vector } from '@grafana/data
  * @param options the field options from the editor panel
  * @param monochrome the boolean in the editor panel that sets whether the sankey is single or multi colored
  * @param color the color chosen in the editor panel for the sankey links if monochrome bool is true
+ * @param resolveColor resolves mapped color names using the current Grafana theme
  * @return {pluginData} the node and link data for the d3-sankey
  * @return {displayNames} the display names for the headers
  * @return {rowDisplayNames}
  * @return {valueField[0]}
  */
-export function parseData(data: { series: any[] }, options: { valueField: any }, monochrome: boolean, color: any) {
+export function parseData(
+  data: { series: any[] },
+  options: { valueField: any },
+  monochrome: boolean,
+  color: any,
+  resolveColor: (color: string) => string
+) {
   
 
   /**
@@ -166,7 +174,7 @@ export function parseData(data: { series: any[] }, options: { valueField: any },
     color: any;
     node0: any;
   }> = [];
-  let pluginDataNodes: Array<{ name: any; id: any; colId: number }> = [];
+  let pluginDataNodes: Array<{ name: any; id: any; colId: number; color?: string }> = [];
   let col0: Array<{ name: any; index: number; color: any }> = [];
   let rowDisplayNames: Array<{ name: any; display: any }> = [];
 
@@ -181,7 +189,14 @@ export function parseData(data: { series: any[] }, options: { valueField: any },
       let node = row[i];
       let index = pluginDataNodes.findIndex((e) => e.name === node && e.colId === i);
       if (index === -1) {
-        index = pluginDataNodes.push({ name: node, id: [`row${rowId}`], colId: i }) - 1;
+        const mappedColor = getMappedColor(allData[i].config.mappings, node);
+        index =
+          pluginDataNodes.push({
+            name: node,
+            id: [`row${rowId}`],
+            colId: i,
+            color: mappedColor ? resolveColor(mappedColor) : undefined,
+          }) - 1;
         if (i === 0) {
           currentColor = colorArray[col0.length % colorArray.length];
           col0.push({ name: node, index: index, color: currentColor });
